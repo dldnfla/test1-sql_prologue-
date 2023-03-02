@@ -4,7 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:fluttertoast/fluttertoast.dart';
-
 import '../api/api.dart';
 import '../model/user.dart';
 
@@ -55,10 +54,16 @@ class _SignupPageState extends State<SignupPage> {
         var resSignup = jsonDecode(res.body);
         if (resSignup['success'] == true) {
           Fluttertoast.showToast(msg: "Signup Successflully!");
+          setState(() {
+            userNameController.clear();
+            emailController.clear();
+            passwordController.clear();
+          });
         } else {
           Fluttertoast.showToast(msg: "Error Occurred. Try again!");
         }
       }
+      ;
     } catch (e) {
       print(e.toString());
       Fluttertoast.showToast(msg: e.toString());
